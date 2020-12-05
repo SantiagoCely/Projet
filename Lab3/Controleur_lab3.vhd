@@ -11,10 +11,14 @@ ENTITY Controleur_lab3 IS
             i_SSCS                                  : IN	STD_LOGIC;
             o_MSTL_GREEN, o_MSTL_YELLOW, o_MSTL_RED : OUT	STD_LOGIC;
             o_SSTL_GREEN, o_SSTL_YELLOW, o_SSTL_RED : OUT	STD_LOGIC;
-            o_MSC_SegA, o_MSC_SegB, o_MSC_SegC, o_MSC_SegD : OUT STD_LOGIC;
-            o_MSC_SegE, o_MSC_SegF, o_MSC_SegG             : OUT STD_LOGIC;
-            o_SSC_SegA, o_SSC_SegB, o_SSC_SegC, o_SSC_SegD : OUT STD_LOGIC;
-            o_SSC_SegE, o_SSC_SegF, o_SSC_SegG             : OUT STD_LOGIC);
+            o_MSC_Seg1A, o_MSC_Seg1B, o_MSC_Seg1C, o_MSC_Seg1D : OUT STD_LOGIC;
+            o_MSC_Seg1E, o_MSC_Seg1F, o_MSC_Seg1G              : OUT STD_LOGIC;
+            o_MSC_Seg2A, o_MSC_Seg2B, o_MSC_Seg2C, o_MSC_Seg2D : OUT STD_LOGIC;
+            o_MSC_Seg2E, o_MSC_Seg2F, o_MSC_Seg2G              : OUT STD_LOGIC;
+            o_SSC_Seg1A, o_SSC_Seg1B, o_SSC_Seg1C, o_SSC_Seg1D : OUT STD_LOGIC;
+            o_SSC_Seg1E, o_SSC_Seg1F, o_SSC_Seg1G              : OUT STD_LOGIC
+            o_SSC_Seg2A, o_SSC_Seg2B, o_SSC_Seg2C, o_SSC_Seg2D : OUT STD_LOGIC;
+            o_SSC_Seg2E, o_SSC_Seg2F, o_SSC_Seg2G              : OUT STD_LOGIC);
 END Controleur_lab3;
 
 ARCHITECTURE lab3 OF Controleur_lab3 IS
@@ -50,13 +54,6 @@ ARCHITECTURE lab3 OF Controleur_lab3 IS
             clock_100Hz		: OUT	STD_LOGIC;
             clock_10Hz		: OUT	STD_LOGIC;
             clock_1Hz		: OUT	STD_LOGIC);
-    END COMPONENT;
-
-    COMPONENT debouncer
-        PORT(
-            i_raw			: IN	STD_LOGIC;
-            i_clock			: IN	STD_LOGIC;
-            o_clean			: OUT	STD_LOGIC);
     END COMPONENT;
 
     COMPONENT fourBit_Counter
@@ -105,10 +102,13 @@ ARCHITECTURE lab3 OF Controleur_lab3 IS
             o_Sum			: OUT	STD_LOGIC_VECTOR(3 DOWNTO 0));
     END COMPONENT;
 
-    COMPONENT dec_7seg
-        PORT(i_hexDigit	: IN STD_LOGIC_VECTOR(3 downto 0);
-            o_segment_a, o_segment_b, o_segment_c, o_segment_d, o_segment_e,
-            o_segment_f, o_segment_g : OUT STD_LOGIC);
+    COMPONENT dec_7seg_decimal
+        PORT(
+            i_hexDigit	: IN STD_LOGIC_VECTOR(3 downto 0);
+            o_segment1_a, o_segment1_b, o_segment1_c, o_segment1_d, o_segment1_e,
+            o_segment1_f, o_segment1_g : OUT STD_LOGIC;
+            o_segment2_a, o_segment2_b, o_segment2_c, o_segment2_d, o_segment2_e,
+            o_segment2_f, o_segment2_g : OUT STD_LOGIC);
     END COMPONENT;
 
 BEGIN
@@ -188,13 +188,20 @@ BEGIN
     -- Output the susbtraction
     BCD_MSC: dec_7seg
     PORT MAP (i_hexDigit => BCDvalue_MSC,
-              o_segment_a => o_MSC_SegA,
-              o_segment_b => o_MSC_SegB,
-              o_segment_c => o_MSC_SegC,
-              o_segment_d => o_MSC_SegD,
-              o_segment_e => o_MSC_SegE,
-              o_segment_f => o_MSC_SegF,
-              o_segment_g => o_MSC_SegG);
+              o_segment1_a => o_MSC_Seg1A,
+              o_segment1_b => o_MSC_Seg1B,
+              o_segment1_c => o_MSC_Seg1C,
+              o_segment1_d => o_MSC_Seg1D,
+              o_segment1_e => o_MSC_Seg1E,
+              o_segment1_f => o_MSC_Seg1F,
+              o_segment1_g => o_MSC_Seg1G,
+              o_segment2_a => o_MSC_Seg2A,
+              o_segment2_b => o_MSC_Seg2B,
+              o_segment2_c => o_MSC_Seg2C,
+              o_segment2_d => o_MSC_Seg2D,
+              o_segment2_e => o_MSC_Seg2E,
+              o_segment2_f => o_MSC_Seg2F,
+              o_segment2_g => o_MSC_Seg2G);
 
     Substractor_SSC: additionSubstraction_fourBits
     PORT MAP (i_Subtraction => '1',
@@ -205,13 +212,20 @@ BEGIN
     -- Output the susbtraction
     BCD_SSC: dec_7seg
     PORT MAP (i_hexDigit => BCDvalue_SSC,
-              o_segment_a => o_SSC_SegA,
-              o_segment_b => o_SSC_SegB,
-              o_segment_c => o_SSC_SegC,
-              o_segment_d => o_SSC_SegD,
-              o_segment_e => o_SSC_SegE,
-              o_segment_f => o_SSC_SegF,
-              o_segment_g => o_SSC_SegG);
+              o_segment1_a => o_SSC_Seg1A,
+              o_segment1_b => o_SSC_Seg1B,
+              o_segment1_c => o_SSC_Seg1C,
+              o_segment1_d => o_SSC_Seg1D,
+              o_segment1_e => o_SSC_Seg1E,
+              o_segment1_f => o_SSC_Seg1F,
+              o_segment1_g => o_SSC_Seg1G,
+              o_segment2_a => o_SSC_Seg2A,
+              o_segment2_b => o_SSC_Seg2B,
+              o_segment2_c => o_SSC_Seg2C,
+              o_segment2_d => o_SSC_Seg2D,
+              o_segment2_e => o_SSC_Seg2E,
+              o_segment2_f => o_SSC_Seg2F,
+              o_segment2_g => o_SSC_Seg2G);
 
     -- Compare values of counters with its respective max value
     Comparateur: fourBitComparator
