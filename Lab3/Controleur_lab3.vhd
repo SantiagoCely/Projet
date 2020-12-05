@@ -6,19 +6,19 @@ USE ieee.std_logic_1164.ALL;
 
 ENTITY Controleur_lab3 IS
 	PORT(
-            i_reset, i_clock                        : IN    STD_LOGIC;
-            i_MSC, i_SSC                            : IN	STD_LOGIC;
-            i_SSCS                                  : IN	STD_LOGIC;
-            o_MSTL_GREEN, o_MSTL_YELLOW, o_MSTL_RED : OUT	STD_LOGIC;
-            o_SSTL_GREEN, o_SSTL_YELLOW, o_SSTL_RED : OUT	STD_LOGIC;
-            o_MSC_Seg1A, o_MSC_Seg1B, o_MSC_Seg1C, o_MSC_Seg1D : OUT STD_LOGIC;
-            o_MSC_Seg1E, o_MSC_Seg1F, o_MSC_Seg1G              : OUT STD_LOGIC;
-            o_MSC_Seg2A, o_MSC_Seg2B, o_MSC_Seg2C, o_MSC_Seg2D : OUT STD_LOGIC;
-            o_MSC_Seg2E, o_MSC_Seg2F, o_MSC_Seg2G              : OUT STD_LOGIC;
-            o_SSC_Seg1A, o_SSC_Seg1B, o_SSC_Seg1C, o_SSC_Seg1D : OUT STD_LOGIC;
-            o_SSC_Seg1E, o_SSC_Seg1F, o_SSC_Seg1G              : OUT STD_LOGIC
-            o_SSC_Seg2A, o_SSC_Seg2B, o_SSC_Seg2C, o_SSC_Seg2D : OUT STD_LOGIC;
-            o_SSC_Seg2E, o_SSC_Seg2F, o_SSC_Seg2G              : OUT STD_LOGIC);
+        i_reset, i_clock                        : IN    STD_LOGIC;
+        i_MSC, i_SSC                            : IN	STD_LOGIC;
+        i_SSCS                                  : IN	STD_LOGIC;
+        o_MSTL_GREEN, o_MSTL_YELLOW, o_MSTL_RED : OUT	STD_LOGIC;
+        o_SSTL_GREEN, o_SSTL_YELLOW, o_SSTL_RED : OUT	STD_LOGIC;
+        o_MSC_Seg1A, o_MSC_Seg1B, o_MSC_Seg1C, o_MSC_Seg1D : OUT STD_LOGIC;
+        o_MSC_Seg1E, o_MSC_Seg1F, o_MSC_Seg1G              : OUT STD_LOGIC;
+        o_MSC_Seg2A, o_MSC_Seg2B, o_MSC_Seg2C, o_MSC_Seg2D : OUT STD_LOGIC;
+        o_MSC_Seg2E, o_MSC_Seg2F, o_MSC_Seg2G              : OUT STD_LOGIC;
+        o_SSC_Seg1A, o_SSC_Seg1B, o_SSC_Seg1C, o_SSC_Seg1D : OUT STD_LOGIC;
+        o_SSC_Seg1E, o_SSC_Seg1F, o_SSC_Seg1G              : OUT STD_LOGIC;
+        o_SSC_Seg2A, o_SSC_Seg2B, o_SSC_Seg2C, o_SSC_Seg2D : OUT STD_LOGIC;
+        o_SSC_Seg2E, o_SSC_Seg2F, o_SSC_Seg2G              : OUT STD_LOGIC);
 END Controleur_lab3;
 
 ARCHITECTURE lab3 OF Controleur_lab3 IS
@@ -186,7 +186,7 @@ BEGIN
               o_CarryOut => carryOut,
               o_Sum => BCDvalue_MSC);
     -- Output the susbtraction
-    BCD_MSC: dec_7seg
+    BCD_MSC: dec_7seg_decimal
     PORT MAP (i_hexDigit => BCDvalue_MSC,
               o_segment1_a => o_MSC_Seg1A,
               o_segment1_b => o_MSC_Seg1B,
@@ -210,7 +210,7 @@ BEGIN
               o_CarryOut => carryOut,
               o_Sum => BCDvalue_SSC);
     -- Output the susbtraction
-    BCD_SSC: dec_7seg
+    BCD_SSC: dec_7seg_decimal
     PORT MAP (i_hexDigit => BCDvalue_SSC,
               o_segment1_a => o_SSC_Seg1A,
               o_segment1_b => o_SSC_Seg1B,

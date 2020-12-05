@@ -10,10 +10,14 @@ architecture sim_lab3 of Controleur_lab3_tb is
     signal i_SSCS_TB	                                    : STD_LOGIC;
     signal o_MSTL_GREEN_TB, o_MSTL_YELLOW_TB, o_MSTL_RED_TB	: STD_LOGIC;
     signal o_SSTL_GREEN_TB, o_SSTL_YELLOW_TB, o_SSTL_RED_TB	: STD_LOGIC;
-    signal o_MSC_SegA_TB, o_MSC_SegB_TB, o_MSC_SegC_TB, o_MSC_SegD_TB : STD_LOGIC;
-    signal o_MSC_SegE_TB, o_MSC_SegF_TB, o_MSC_SegG_TB	              : STD_LOGIC;
-    signal o_SSC_SegA_TB, o_SSC_SegB_TB, o_SSC_SegC_TB, o_SSC_SegD_TB : STD_LOGIC;
-    signal o_SSC_SegE_TB, o_SSC_SegF_TB, o_SSC_SegG_TB	              : STD_LOGIC;
+    signal o_MSC_Seg1A_TB, o_MSC_Seg1B_TB, o_MSC_Seg1C_TB, o_MSC_Seg1D_TB : STD_LOGIC;
+    signal o_MSC_Seg1E_TB, o_MSC_Seg1F_TB, o_MSC_Seg1G_TB	              : STD_LOGIC;
+    signal o_MSC_Seg2A_TB, o_MSC_Seg2B_TB, o_MSC_Seg2C_TB, o_MSC_Seg2D_TB : STD_LOGIC;
+    signal o_MSC_Seg2E_TB, o_MSC_Seg2F_TB, o_MSC_Seg2G_TB	              : STD_LOGIC;
+    signal o_SSC_Seg1A_TB, o_SSC_Seg1B_TB, o_SSC_Seg1C_TB, o_SSC_Seg1D_TB : STD_LOGIC;
+    signal o_SSC_Seg1E_TB, o_SSC_Seg1F_TB, o_SSC_Seg1G_TB	              : STD_LOGIC;
+    signal o_SSC_Seg2A_TB, o_SSC_Seg2B_TB, o_SSC_Seg2C_TB, o_SSC_Seg2D_TB : STD_LOGIC;
+    signal o_SSC_Seg2E_TB, o_SSC_Seg2F_TB, o_SSC_Seg2G_TB	              : STD_LOGIC;
     signal sim_end                                          : boolean := false;
 
     COMPONENT Controleur_lab3 IS
@@ -23,10 +27,14 @@ architecture sim_lab3 of Controleur_lab3_tb is
             i_SSCS                                  : IN	STD_LOGIC;
             o_MSTL_GREEN, o_MSTL_YELLOW, o_MSTL_RED : OUT	STD_LOGIC;
             o_SSTL_GREEN, o_SSTL_YELLOW, o_SSTL_RED : OUT	STD_LOGIC;
-            o_MSC_SegA, o_MSC_SegB, o_MSC_SegC, o_MSC_SegD : OUT STD_LOGIC;
-            o_MSC_SegE, o_MSC_SegF, o_MSC_SegG             : OUT STD_LOGIC;
-            o_SSC_SegA, o_SSC_SegB, o_SSC_SegC, o_SSC_SegD : OUT STD_LOGIC;
-            o_SSC_SegE, o_SSC_SegF, o_SSC_SegG             : OUT STD_LOGIC);
+            o_MSC_Seg1A, o_MSC_Seg1B, o_MSC_Seg1C, o_MSC_Seg1D : OUT STD_LOGIC;
+            o_MSC_Seg1E, o_MSC_Seg1F, o_MSC_Seg1G              : OUT STD_LOGIC;
+            o_MSC_Seg2A, o_MSC_Seg2B, o_MSC_Seg2C, o_MSC_Seg2D : OUT STD_LOGIC;
+            o_MSC_Seg2E, o_MSC_Seg2F, o_MSC_Seg2G              : OUT STD_LOGIC;
+            o_SSC_Seg1A, o_SSC_Seg1B, o_SSC_Seg1C, o_SSC_Seg1D : OUT STD_LOGIC;
+            o_SSC_Seg1E, o_SSC_Seg1F, o_SSC_Seg1G              : OUT STD_LOGIC;
+            o_SSC_Seg2A, o_SSC_Seg2B, o_SSC_Seg2C, o_SSC_Seg2D : OUT STD_LOGIC;
+            o_SSC_Seg2E, o_SSC_Seg2F, o_SSC_Seg2G              : OUT STD_LOGIC);
     END COMPONENT;
 
     constant period: time := 1000 ms;
@@ -45,20 +53,34 @@ begin
                       o_SSTL_GREEN => o_SSTL_GREEN_TB,
                       o_SSTL_YELLOW => o_SSTL_YELLOW_TB,
                       o_SSTL_RED => o_SSTL_RED_TB,
-                      o_MSC_SegA => o_MSC_SegA_TB,
-                      o_MSC_SegB => o_MSC_SegB_TB,
-                      o_MSC_SegC => o_MSC_SegC_TB,
-                      o_MSC_SegD => o_MSC_SegD_TB,
-                      o_MSC_SegE => o_MSC_SegE_TB,
-                      o_MSC_SegF => o_MSC_SegF_TB,
-                      o_MSC_SegG => o_MSC_SegG_TB,
-                      o_SSC_SegA => o_SSC_SegA_TB,
-                      o_SSC_SegB => o_SSC_SegB_TB,
-                      o_SSC_SegC => o_SSC_SegC_TB,
-                      o_SSC_SegD => o_SSC_SegD_TB,
-                      o_SSC_SegE => o_SSC_SegE_TB,
-                      o_SSC_SegF => o_SSC_SegF_TB,
-                      o_SSC_SegG => o_SSC_SegG_TB);
+                      o_MSC_Seg1A => o_MSC_Seg1A_TB,
+                      o_MSC_Seg1B => o_MSC_Seg1B_TB,
+                      o_MSC_Seg1C => o_MSC_Seg1C_TB,
+                      o_MSC_Seg1D => o_MSC_Seg1D_TB,
+                      o_MSC_Seg1E => o_MSC_Seg1E_TB,
+                      o_MSC_Seg1F => o_MSC_Seg1F_TB,
+                      o_MSC_Seg1G => o_MSC_Seg1G_TB,
+                      o_MSC_Seg2A => o_MSC_Seg2A_TB,
+                      o_MSC_Seg2B => o_MSC_Seg2B_TB,
+                      o_MSC_Seg2C => o_MSC_Seg2C_TB,
+                      o_MSC_Seg2D => o_MSC_Seg2D_TB,
+                      o_MSC_Seg2E => o_MSC_Seg2E_TB,
+                      o_MSC_Seg2F => o_MSC_Seg2F_TB,
+                      o_MSC_Seg2G => o_MSC_Seg2G_TB,
+                      o_SSC_Seg1A => o_SSC_Seg1A_TB,
+                      o_SSC_Seg1B => o_SSC_Seg1B_TB,
+                      o_SSC_Seg1C => o_SSC_Seg1C_TB,
+                      o_SSC_Seg1D => o_SSC_Seg1D_TB,
+                      o_SSC_Seg1E => o_SSC_Seg1E_TB,
+                      o_SSC_Seg1F => o_SSC_Seg1F_TB,
+                      o_SSC_Seg1G => o_SSC_Seg1G_TB,
+                      o_SSC_Seg2A => o_SSC_Seg2A_TB,
+                      o_SSC_Seg2B => o_SSC_Seg2B_TB,
+                      o_SSC_Seg2C => o_SSC_Seg2C_TB,
+                      o_SSC_Seg2D => o_SSC_Seg2D_TB,
+                      o_SSC_Seg2E => o_SSC_Seg2E_TB,
+                      o_SSC_Seg2F => o_SSC_Seg2F_TB,
+                      o_SSC_Seg2G => o_SSC_Seg2G_TB);
 
     clock_process : process
     begin
