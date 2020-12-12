@@ -130,14 +130,14 @@ BEGIN
     MSC_MAX_Value: fourBit_Counter
     PORT MAP (i_resetBar => i_reset,
 	          i_load => MSC_MAX_input_value,
-			  i_clock => i_clock,
+			  i_clock => clock_div_1Hz,
               o_Value => MSC_MAX);
 
     SSC_MAX_input_value <= NOT i_SSC;
     SSC_MAX_Value: fourBit_Counter
     PORT MAP (i_resetBar => i_reset,
 	          i_load => SSC_MAX_input_value,
-			  i_clock => i_clock,
+			  i_clock => clock_div_1Hz,
               o_Value => SSC_MAX);
 
     MSC_SSC_reset_new <= i_reset AND NOT MST_OR_SST_countDone;
@@ -145,7 +145,7 @@ BEGIN
     PORT MAP (i_resetBar => i_reset,
 	          i_d => MSC_SSC_reset_new,
 			  i_enable => '1',
-              i_clock => i_clock,
+              i_clock => clock_div_1Hz,
               o_q => MSC_SSC_reset,
               o_qBar => NOT_MSC_SSC_reset);
 
@@ -154,14 +154,14 @@ BEGIN
     MSC: fourBit_Counter
     PORT MAP (i_resetBar => MSC_SSC_reset,
 	          i_load => MSC_enable,
-			  i_clock => i_clock,
+			  i_clock => clock_div_1Hz,
               o_Value => MSC_current);
 
     SSC_enable <= SSTL_green AND NOT rythmeurEnable;
     SSC: fourBit_Counter
     PORT MAP (i_resetBar => MSC_SSC_reset,
 	          i_load => SSC_enable,
-			  i_clock => i_clock,
+			  i_clock => clock_div_1Hz,
               o_Value => SSC_current);
 
     -- Multiplexer to choose between MSC and SSC
@@ -242,7 +242,7 @@ BEGIN
     rythmeurEnable <= equalAB AND NOT zeroComparison;
     Rythmeur: rythmeur4bits
     PORT MAP (i_resetBar => MSC_SSC_reset,
-	          i_clock => i_clock,
+	          i_clock => clock_div_1Hz,
 			  i_enable => rythmeurEnable,
               MST_OR_SST => SSTL,
               o_countDone => MST_OR_SST_countDone);
@@ -253,7 +253,7 @@ BEGIN
     PORT MAP (i_resetBar => i_reset,
 	          i_d => SSTL_NEW,
 			  i_enable => '1',
-              i_clock => i_clock,
+              i_clock => clock_div_1Hz,
               o_q => SSTL,
               o_qBar => NOT_SSTL);
 
